@@ -1057,9 +1057,9 @@ body::before {
     opacity: 1;
 }
 
-.user-action span {
-    position: relative;
-    z-index: 1;
+/* Ensure button text stays visible above the ::before gradient overlay */
+.user-action {
+    isolation: isolate;
 }
 
 .empty-state {
