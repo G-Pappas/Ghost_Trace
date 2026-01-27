@@ -2,6 +2,7 @@
 
 **Track your Instagram unfollowers safely and legally. 100% private - your data never leaves your device.**
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://g-pappas.github.io/Ghost_Trace/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---

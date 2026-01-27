@@ -185,14 +185,15 @@ class DatabaseManager {
 // Instagram Data Parser
 // ========================================
 class InstagramDataParser {
-    static parseFollowers(jsonData) {
+    /**
+     * Parse followers from JSON format
+     */
+    static parseFollowersJSON(jsonData) {
         try {
-            // Validate input
             if (!jsonData) {
                 throw new Error('File appears to be empty');
             }
 
-            // Instagram exports followers as array of objects
             const users = [];
 
             if (!Array.isArray(jsonData)) {
@@ -200,10 +201,9 @@ class InstagramDataParser {
             }
 
             if (jsonData.length === 0) {
-                return users; // Empty but valid
+                return users;
             }
 
-            // Check if first item has expected structure
             const firstItem = jsonData[0];
             if (!firstItem.string_list_data && !firstItem.value) {
                 throw new Error('Unrecognized file format. Make sure you uploaded the followers_1.json file from Instagram export.');
@@ -225,34 +225,33 @@ class InstagramDataParser {
 
             return users;
         } catch (error) {
-            console.error('Error parsing followers:', error);
+            console.error('Error parsing followers JSON:', error);
             throw error;
         }
     }
 
-    static parseFollowing(jsonData) {
+    /**
+     * Parse following from JSON format
+     */
+    static parseFollowingJSON(jsonData) {
         try {
-            // Validate input
             if (!jsonData) {
                 throw new Error('File appears to be empty');
             }
 
             const users = [];
 
-            // Following can be in relationships_following format
             if (Array.isArray(jsonData)) {
                 if (jsonData.length === 0) {
-                    return users; // Empty but valid
+                    return users;
                 }
 
-                // Check if first item has expected structure
                 const firstItem = jsonData[0];
                 if (!firstItem.title && !firstItem.string_list_data && !firstItem.value) {
                     throw new Error('Unrecognized file format. Make sure you uploaded the following.json file from Instagram export.');
                 }
 
                 jsonData.forEach(item => {
-                    // Check if username is in title (new Instagram format)
                     if (item.title) {
                         const data = item.string_list_data?.[0] || {};
                         users.push({
@@ -261,7 +260,6 @@ class InstagramDataParser {
                             href: data.href || null
                         });
                     } else if (item.string_list_data && Array.isArray(item.string_list_data)) {
-                        // Fallback to old format with value in string_list_data
                         item.string_list_data.forEach(data => {
                             if (data.value) {
                                 users.push({
@@ -274,9 +272,7 @@ class InstagramDataParser {
                     }
                 });
             } else if (jsonData.relationships_following) {
-                // Alternative format with relationships_following wrapper
                 jsonData.relationships_following.forEach(item => {
-                    // Check if username is in title (new Instagram format)
                     if (item.title) {
                         const data = item.string_list_data?.[0] || {};
                         users.push({
@@ -285,7 +281,6 @@ class InstagramDataParser {
                             href: data.href || null
                         });
                     } else if (item.string_list_data) {
-                        // Fallback to old format
                         item.string_list_data.forEach(data => {
                             if (data.value) {
                                 users.push({
@@ -298,14 +293,89 @@ class InstagramDataParser {
                     }
                 });
             } else {
-                throw new Error('Expected Instagram export format. File should contain following data or relationships_following array.');
+                throw new Error('Expected Instagram export format.');
             }
 
             return users;
         } catch (error) {
-            console.error('Error parsing following:', error);
+            console.error('Error parsing following JSON:', error);
             throw error;
         }
+    }
+
+    /**
+     * Parse users from HTML format (Instagram HTML export)
+     * HTML format contains links like: <a href="https://www.instagram.com/username">username</a>
+     */
+    static parseHTML(htmlContent) {
+        try {
+            const users = [];
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(htmlContent, 'text/html');
+
+            // Find all Instagram profile links
+            const links = doc.querySelectorAll('a[href*="instagram.com"]');
+
+            links.forEach(link => {
+                const href = link.getAttribute('href');
+                const username = link.textContent?.trim();
+
+                // Extract username from URL if text content doesn't match
+                if (href && href.includes('instagram.com')) {
+                    // Skip non-profile links (like instagram.com/explore, etc.)
+                    const urlMatch = href.match(/instagram\.com\/([a-zA-Z0-9._]+)\/?$/);
+                    if (urlMatch && urlMatch[1]) {
+                        const extractedUsername = urlMatch[1];
+                        // Use text content if it looks like a username, otherwise use extracted
+                        const finalUsername = username && !username.includes(' ') && username.length < 50
+                            ? username
+                            : extractedUsername;
+
+                        users.push({
+                            username: finalUsername,
+                            timestamp: null,
+                            href: href
+                        });
+                    }
+                }
+            });
+
+            // Remove duplicates (same username)
+            const uniqueUsers = [];
+            const seen = new Set();
+            users.forEach(user => {
+                const lower = user.username.toLowerCase();
+                if (!seen.has(lower)) {
+                    seen.add(lower);
+                    uniqueUsers.push(user);
+                }
+            });
+
+            return uniqueUsers;
+        } catch (error) {
+            console.error('Error parsing HTML:', error);
+            throw error;
+        }
+    }
+
+    /**
+     * Legacy method for backward compatibility - routes to appropriate parser
+     */
+    static parseFollowers(data, isHTML = false) {
+        if (isHTML) {
+            return this.parseHTML(data);
+        }
+        return this.parseFollowersJSON(data);
+    }
+
+    /**
+     * Legacy method for backward compatibility - routes to appropriate parser
+     */
+    static parseFollowing(data, isHTML = false) {
+        if (isHTML) {
+            return this.parseHTML(data);
+        }
+        return this.parseFollowingJSON(data);
     }
 }
 
@@ -490,38 +560,59 @@ class UIController {
 
     async handleFiles(files) {
         for (const file of files) {
-            if (!file.name.endsWith('.json')) {
-                this.showToast('Please upload JSON files only', 'error');
+            const isJSON = file.name.endsWith('.json');
+            const isHTML = file.name.endsWith('.html') || file.name.endsWith('.htm');
+
+            if (!isJSON && !isHTML) {
+                this.showToast('Please upload JSON or HTML files from Instagram export', 'error');
                 continue;
             }
 
             try {
-                await this.processFile(file);
+                await this.processFile(file, isHTML);
             } catch (error) {
                 console.error('File handling error:', error);
             }
         }
     }
 
-    async processFile(file) {
+    async processFile(file, isHTML = false) {
         try {
             const text = await file.text();
-            const data = JSON.parse(text);
+            const fileName = file.name.toLowerCase();
 
-            // Validate file structure and determine type
-            if (this.isFollowersFile(data)) {
-                this.uploadedFiles.followers = { name: file.name, data };
-                this.showToast(`✅ Followers file loaded: ${file.name}`, 'success');
-            } else if (this.isFollowingFile(data)) {
-                this.uploadedFiles.following = { name: file.name, data };
-                this.showToast(`✅ Following file loaded: ${file.name}`, 'success');
+            if (isHTML) {
+                // HTML file processing
+                if (fileName.includes('follower') && !fileName.includes('following')) {
+                    this.uploadedFiles.followers = { name: file.name, data: text, isHTML: true };
+                    this.showToast(`✅ Followers file loaded: ${file.name}`, 'success');
+                } else if (fileName.includes('following')) {
+                    this.uploadedFiles.following = { name: file.name, data: text, isHTML: true };
+                    this.showToast(`✅ Following file loaded: ${file.name}`, 'success');
+                } else {
+                    this.showToast(
+                        `❌ Can't determine file type. Please rename to include "followers" or "following" in the filename.`,
+                        'error'
+                    );
+                    return;
+                }
             } else {
-                // Provide helpful error message
-                this.showToast(
-                    `❌ This doesn't look like an Instagram export file. Please upload "followers_1.json" or "following.json" from Instagram's official data export (Settings → Security → Download Your Information).`,
-                    'error'
-                );
-                return;
+                // JSON file processing
+                const data = JSON.parse(text);
+
+                if (this.isFollowersFile(data)) {
+                    this.uploadedFiles.followers = { name: file.name, data, isHTML: false };
+                    this.showToast(`✅ Followers file loaded: ${file.name}`, 'success');
+                } else if (this.isFollowingFile(data)) {
+                    this.uploadedFiles.following = { name: file.name, data, isHTML: false };
+                    this.showToast(`✅ Following file loaded: ${file.name}`, 'success');
+                } else {
+                    this.showToast(
+                        `❌ This doesn't look like an Instagram export file. Please upload followers or following files from Instagram's official data export.`,
+                        'error'
+                    );
+                    return;
+                }
             }
 
             this.renderUploadedFiles();
@@ -530,22 +621,21 @@ class UIController {
         } catch (error) {
             console.error('File processing error:', error);
 
-            // Specific error messages based on error type
             if (error instanceof SyntaxError) {
                 this.showToast(
-                    `❌ Invalid JSON file. Make sure you're uploading the original files from Instagram without editing them. File: ${file.name}`,
+                    `❌ Invalid JSON file. Make sure you're uploading the original files from Instagram. File: ${file.name}`,
                     'error'
                 );
             } else {
                 this.showToast(
-                    `❌ Error reading file "${file.name}". Please try downloading your Instagram data again. Error: ${error.message}`,
+                    `❌ Error reading file "${file.name}". Error: ${error.message}`,
                     'error'
                 );
             }
         }
     }
 
-    // Helper methods to determine file type based on content structure
+    // Helper methods to determine file type based on content structure (JSON only)
     isFollowersFile(data) {
         return Array.isArray(data) && data.every(item => typeof item === 'object' && item !== null && 'string_list_data' in item);
     }
@@ -604,9 +694,11 @@ class UIController {
             this.analyzeBtn.disabled = true;
             this.analyzeBtn.innerHTML = '<span class="spinner"></span> Analyzing...';
 
-            // Parse data
-            const followers = InstagramDataParser.parseFollowers(this.uploadedFiles.followers.data);
-            const following = InstagramDataParser.parseFollowing(this.uploadedFiles.following.data);
+            // Parse data - detect format from stored isHTML flag
+            const followersFile = this.uploadedFiles.followers;
+            const followingFile = this.uploadedFiles.following;
+            const followers = InstagramDataParser.parseFollowers(followersFile.data, followersFile.isHTML);
+            const following = InstagramDataParser.parseFollowing(followingFile.data, followingFile.isHTML);
 
             // Load previous snapshot
             const previousSnapshot = await this.db.getLatestSnapshot();
@@ -974,8 +1066,8 @@ class UIController {
         const postText = `👻 My Instagram Stats:\n\n` +
             `📊 ${unfollowersCount} unfollowers detected\n` +
             `👤 ${notFollowingBackCount} not following me back\n\n` +
-            `Track yours safely with #GhostTrace\n\n` +
-            `#InstagramTracker`;
+            `Track yours safely at: g-pappas.github.io/Ghost_Trace/\n\n` +
+            `#GhostTrace #InstagramTracker`;
 
         const shareUrl = `https://x.com/intent/tweet?text=${encodeURIComponent(postText)}`;
         window.open(shareUrl, '_blank', 'width=550,height=420');
