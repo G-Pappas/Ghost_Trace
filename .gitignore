@@ -1,0 +1,46 @@
+# Dependencies
+node_modules/
+
+# IDE and Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+# Build outputs
+dist/
+build/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Test data (optional - remove this line if you want demo to work)
+# test_data/
+
+# Development files
+*.md
+!README.md
+
+# Gemini/Agent artifacts
+.gemini/
+
+# Temporary files
+*.tmp
+*.temp

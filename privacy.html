@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <meta name="description" content="GhostTrace Privacy Policy - Your data never leaves your device">
+    <meta name="theme-color" content="#833AB4">
+    <title>Privacy Policy - GhostTrace</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_additions.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">👻</span>
+                    <h1>GhostTrace</h1>
+                </div>
+                <div style="display: flex; gap: var(--spacing-sm); align-items: center;">
+                    <a href="index.html" class="btn-back">← Back to App</a>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Privacy Policy Content -->
+        <main class="main-content">
+            <div class="card glass-card" style="max-width: 800px; margin: 0 auto;">
+                <div style="padding: var(--spacing-xl);">
+                    <h1 style="margin-bottom: var(--spacing-lg);">Privacy Policy</h1>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--spacing-xl);">
+                        <em>Last updated: January 26, 2026</em>
+                    </p>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Our Commitment to Your
+                        Privacy</h2>
+                    <p>GhostTrace is built with privacy as the #1 priority. Unlike other Instagram tracking tools, we
+                        don't collect, store, or transmit your data anywhere.</p>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">What Data We Process
+                    </h2>
+                    <p><strong>Short answer: None of your personal data.</strong></p>
+                    <p>GhostTrace processes Instagram data export files (<code>followers_1.json</code> and
+                        <code>following.json</code>) entirely in your browser. This means:
+                    </p>
+                    <ul>
+                        <li>✅ Your data never leaves your device</li>
+                        <li>✅ No files are uploaded to any server</li>
+                        <li>✅ No Instagram credentials are required</li>
+                        <li>✅ No API calls to Instagram or third parties</li>
+                        <li>✅ All processing happens locally in your browser</li>
+                    </ul>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">How It Works</h2>
+                    <p>GhostTrace uses Instagram's official data export feature, which is the only legal and safe way to
+                        access your follower data:</p>
+                    <ol>
+                        <li>You download your data from Instagram (using their official export tool)</li>
+                        <li>You select the JSON files on your device</li>
+                        <li>GhostTrace reads and analyzes the files in your browser using JavaScript</li>
+                        <li>Results are displayed to you and optionally stored in your browser's local storage
+                            (IndexedDB)</li>
+                    </ol>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Data Storage</h2>
+                    <p>GhostTrace uses your browser's IndexedDB (local storage) to:</p>
+                    <ul>
+                        <li>Save your previous snapshots for comparison (unfollowers detection)</li>
+                        <li>Remember your theme preference (dark/light mode)</li>
+                        <li>Store your whitelist if you use that feature</li>
+                    </ul>
+                    <p><strong>Important:</strong> This data never leaves your device. It's stored locally in your
+                        browser and you can clear it anytime by clearing your browser data.</p>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">No Third-Party Services
+                    </h2>
+                    <p>GhostTrace does not use:</p>
+                    <ul>
+                        <li>❌ Analytics or tracking scripts</li>
+                        <li>❌ Backend servers or databases</li>
+                        <li>❌ Third-party APIs</li>
+                        <li>❌ Cookies (except for local storage mentioned above)</li>
+                        <li>❌ Instagram's API</li>
+                    </ul>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Instagram's Terms of
+                        Service</h2>
+                    <p>GhostTrace complies with Instagram's Terms of Service by:</p>
+                    <ul>
+                        <li>✅ Using only Instagram's official data export feature</li>
+                        <li>✅ Not accessing Instagram's API without permission</li>
+                        <li>✅ Not requiring your Instagram password or credentials</li>
+                        <li>✅ Not scraping or automating Instagram access</li>
+                    </ul>
+                    <p>This is the <strong>only safe and legal way</strong> to track your Instagram followers.</p>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Open Source &
+                        Transparency</h2>
+                    <p>GhostTrace is designed to be transparent. You can:</p>
+                    <ul>
+                        <li>View the source code in your browser's developer tools</li>
+                        <li>Verify that no network requests are made when processing your data</li>
+                        <li>Use it completely offline after the first load</li>
+                    </ul>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Your Rights</h2>
+                    <p>Since we don't collect any data, there's nothing to delete, export, or request. You have complete
+                        control:</p>
+                    <ul>
+                        <li>All data is on your device</li>
+                        <li>Clear browser data to remove all traces</li>
+                        <li>Use in private/incognito mode for zero persistence</li>
+                    </ul>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Changes to This Policy
+                    </h2>
+                    <p>If we ever change how GhostTrace works (which would require adding data collection), we will
+                        update this policy and the "Last updated" date. We are committed to maintaining privacy as our
+                        core principle.</p>
+
+                    <h2 style="margin-top: var(--spacing-xl); margin-bottom: var(--spacing-md);">Contact</h2>
+                    <p>If you have any questions about this privacy policy or GhostTrace's privacy practices, feel free
+                        to reach out.</p>
+
+                    <div
+                        style="margin-top: var(--spacing-2xl); padding: var(--spacing-lg); background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: var(--radius-md);">
+                        <p style="margin: 0;"><strong>🔒 Privacy Guarantee:</strong> Your Instagram data is yours and
+                            yours alone. We will never collect, store, or sell your data.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>GhostTrace • Your data stays on your device 🔒 • Uses Instagram's official export - doesn't violate any
+                rules</p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Back to App</a>
+                <span class="footer-divider">•</span>
+                <a href="https://buymeacoffee.com/elpadregr" target="_blank" rel="noopener" class="coffee-link">
+                    ☕ Buy me a coffee
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Theme Toggle Script -->
+    <script>
+        // Theme Management
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('.theme-icon');
+        const html = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('ghosttrace-theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        updateThemeIcon(savedTheme);
+
+        // Toggle theme
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('ghosttrace-theme', newTheme);
+            updateThemeIcon(newTheme);
+        });
+
+        function updateThemeIcon(theme) {
+            themeIcon.textContent = theme === 'dark' ? '☀️' : '🌙';
+        }
+    </script>
+</body>
+
+</html>

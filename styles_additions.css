@@ -1,0 +1,192 @@
+/* Accessibility - Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    body::before {
+        animation: none;
+    }
+
+    .btn-primary,
+    .toast {
+        animation: none !important;
+    }
+}
+
+/* Logo styling override - uses float animation from styles.css */
+.logo h1 {
+    background: var(--holographic-gradient);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Remove stat card pulsing animation */
+.stat-card.highlight-card {
+    border: 2px solid var(--neon-purple);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(236, 72, 153, 0.05));
+    /* No animation */
+}
+
+/* Remove stat card neon animation */
+.stat-card.neon-card {
+    border: 2px solid var(--neon-cyan);
+    background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.05));
+    /* No animation */
+}
+
+/* Simplify stat card hover - no bounce */
+.stat-card:hover {
+    transform: none;
+    box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+/* Remove stat value animations */
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    /* No animation */
+}
+
+/* Simplify button hover - no bounce */
+.btn:hover {
+    transform: none;
+    opacity: 0.9;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: none;
+    box-shadow:
+        0 8px 25px rgba(139, 92, 246, 0.5),
+        0 4px 12px rgba(139, 92, 246, 0.3),
+        0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: scale(0.98);
+    transition: transform var(--transition-fast);
+}
+
+/* Remove glass card animations */
+.glass-card {
+    background: var(--bg-glass);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid var(--bg-glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow:
+        0 8px 32px var(--shadow-color),
+        0 2px 8px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset;
+    /* No hover effects */
+}
+
+/* Remove user avatar gradient border */
+.user-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    background: var(--instagram-gradient);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    /* No animation or gradient border */
+}
+
+/* Remove user item staggered animation */
+.user-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-fast);
+    /* No entrance animation */
+}
+
+.user-item:hover {
+    background: var(--bg-hover);
+}
+
+/* Custom Scrollbar */
+.tab-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tab-content::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
+}
+
+.tab-content::-webkit-scrollbar-thumb {
+    background: var(--instagram-gradient);
+    border-radius: var(--radius-sm);
+}
+
+.tab-content::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, var(--neon-purple), var(--neon-pink));
+}
+
+/* Action Buttons Enhancement */
+.action-buttons {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    border-top: 1px solid var(--border-color);
+}
+
+.btn-export,
+.btn-share {
+    flex: 1;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-export::before,
+.btn-share::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--instagram-gradient);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.btn-export:hover,
+.btn-share:hover {
+    color: white;
+    border-color: transparent;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--shadow-glow);
+}
+
+.btn-export:hover::before,
+.btn-share:hover::before {
+    opacity: 1;
+}

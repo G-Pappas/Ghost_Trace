@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Test</title>
+</head>
+
+<body>
+    <h1>Testing app.js</h1>
+    <div id="output"></div>
+    <script>
+        // Test if app.js loads
+        const script = document.createElement('script');
+        script.src = 'app.js';
+        script.onerror = function () {
+            document.getElementById('output').innerHTML = '<p style="color: red;">❌ app.js failed to load</p>';
+        };
+        script.onload = function () {
+            document.getElementById('output').innerHTML = '<p style="color: green;">✅ app.js loaded successfully!</p>';
+        };
+        document.head.appendChild(script);
+    </script>
+</body>
+
+</html>

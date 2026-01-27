@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="dark light">
+    <meta name="description"
+        content="GhostTrace - Track your Instagram unfollowers and see who doesn't follow you back">
+    <meta name="theme-color" content="#833AB4">
+    <title>GhostTrace - Instagram Follower Tracker</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="favicon.png">
+
+    <!-- Open Graph / Social Media -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="GhostTrace - Instagram Follower Tracker">
+    <meta property="og:description"
+        content="Track your Instagram unfollowers safely and legally. 100% private - your data never leaves your device. Uses Instagram's official export method - doesn't violate any rules.">
+    <meta property="og:image" content="favicon.png">
+    <meta property="og:url" content="">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="GhostTrace - Instagram Follower Tracker">
+    <meta name="twitter:description"
+        content="Track your Instagram unfollowers safely and legally. 100% private - your data never leaves your device.">
+    <meta name="twitter:image" content="favicon.png">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles_additions.css">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">👻</span>
+                    <h1>GhostTrace</h1>
+                </div>
+                <div style="display: flex; gap: var(--spacing-sm); align-items: center;">
+                    <a href="demo.html" class="btn"
+                        style="padding: 8px 16px; font-size: 0.875rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(6, 182, 212, 0.05)); border: 1px solid var(--neon-cyan);">
+                        ✨ View Demo
+                    </a>
+                    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                        <span class="theme-icon">🌙</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Privacy & Security Banner -->
+        <div class="security-banner">
+            <div class="security-icon">🔒</div>
+            <div class="security-content">
+                <strong>100% Safe & Rule-Compliant</strong>
+                <p>This is the ONLY safe and legal way to track your Instagram followers. Your data never leaves your
+                    device. No passwords, no API violations, no data leaks.</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <div class="card glass-card">
+                    <!-- Instructions Accordion -->
+                    <details class="instructions-accordion" id="instructionsAccordion">
+                        <summary class="instructions-header">
+                            <span class="instructions-icon">📋</span>
+                            <span>Click here to see how to download your Instagram Data</span>
+                            <span class="chevron">▼</span>
+                        </summary>
+                        <div class="instructions-content">
+                            <div class="instruction-steps">
+                                <div class="step">
+                                    <span class="step-number">1</span>
+                                    <div class="step-content">
+                                        <strong>Open Instagram Settings</strong>
+                                        <p>Go to your profile, tap the <strong>☰ Menu</strong>, then select
+                                            <strong>Settings and privacy</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">2</span>
+                                    <div class="step-content">
+                                        <strong>Go to Accounts Center</strong>
+                                        <p>Tap <strong>Accounts Center</strong>, then tap <strong>Your information and
+                                                permissions</strong></p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">3</span>
+                                    <div class="step-content">
+                                        <strong>Request Your Data</strong>
+                                        <p>Tap <strong>Download your information</strong>, then <strong>Download or
+                                                transfer information</strong></p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">4</span>
+                                    <div class="step-content">
+                                        <strong>Select Your Account</strong>
+                                        <p>Choose your Instagram account and select <strong>Some of your
+                                                information</strong></p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">5</span>
+                                    <div class="step-content">
+                                        <strong>Choose What to Download</strong>
+                                        <p>Deselect everything, then check only <strong>Followers and
+                                                following</strong>. Tap Next.</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">6</span>
+                                    <div class="step-content">
+                                        <strong>Set Export Options</strong>
+                                        <p>Set date range to <strong>All time</strong>, format to <strong>JSON</strong>,
+                                            and choose <strong>Download to device</strong></p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">7</span>
+                                    <div class="step-content">
+                                        <strong>Create the Export</strong>
+                                        <p>Tap <strong>Create files</strong>. Instagram will email you when ready (can
+                                            take up to 48 hours)</p>
+                                    </div>
+                                </div>
+                                <div class="step">
+                                    <span class="step-number">8</span>
+                                    <div class="step-content">
+                                        <strong>Upload Your Files</strong>
+                                        <p>Download the ZIP file, extract it, and find the JSON files in the
+                                            <strong>connections/followers_and_following/</strong> folder
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- File Upload -->
+                    <div class="upload-area">
+                        <div class="upload-dropzone" id="dropzone">
+                            <div class="dropzone-content">
+                                <span class="upload-icon">📁</span>
+                                <p class="upload-title">Drop your files here</p>
+                                <p class="upload-subtitle">or click to browse</p>
+                                <p class="upload-hint">Upload <strong>followers_1.json</strong> and
+                                    <strong>following.json</strong>
+                                </p>
+                            </div>
+                            <input type="file" id="fileInput" accept=".json" multiple hidden>
+                        </div>
+
+                        <div class="uploaded-files" id="uploadedFiles">
+                            <!-- Uploaded files will appear here -->
+                        </div>
+
+                        <button class="btn btn-primary btn-analyze" id="analyzeBtn" disabled>
+                            <span class="btn-icon">🔍</span>
+                            Analyze Data
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section" id="resultsSection" hidden>
+                <div class="stats-grid">
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">👥</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="followersCount">0</span>
+                            <span class="stat-label">Followers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">➡️</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="followingCount">0</span>
+                            <span class="stat-label">Following</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card highlight-card">
+                        <span class="stat-icon">👻</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="unfollowersCount">0</span>
+                            <span class="stat-label">Unfollowers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card new-followers-card">
+                        <span class="stat-icon">🌟</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="newFollowersCount">0</span>
+                            <span class="stat-label">New Followers</span>
+                        </div>
+                    </div>
+                    <div class="stat-card glass-card">
+                        <span class="stat-icon">💔</span>
+                        <div class="stat-info">
+                            <span class="stat-value" id="notFollowingBackCount">0</span>
+                            <span class="stat-label">Don't Follow Back</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs-container glass-card">
+                    <div class="tabs-header">
+                        <button class="tab-btn active" data-tab="unfollowers">
+                            <span class="tab-icon">👻</span>
+                            Unfollowers
+                        </button>
+                        <button class="tab-btn" data-tab="newFollowers">
+                            <span class="tab-icon">🌟</span>
+                            New Followers
+                        </button>
+                        <button class="tab-btn" data-tab="notFollowingBack">
+                            <span class="tab-icon">💔</span>
+                            Don't Follow Back
+                        </button>
+                        <button class="tab-btn" data-tab="whitelist">
+                            <span class="tab-icon">⭐</span>
+                            Whitelist
+                        </button>
+                        <button class="tab-btn" data-tab="followers">
+                            <span class="tab-icon">👥</span>
+                            All Followers
+                        </button>
+                        <button class="tab-btn" data-tab="following">
+                            <span class="tab-icon">➡️</span>
+                            Following
+                        </button>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="search-container">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="searchInput" placeholder="Search usernames...">
+                    </div>
+
+                    <!-- Tab Content -->
+                    <div class="tab-content" id="tabContent">
+                        <div class="user-list" id="userList">
+                            <!-- Users will be rendered here -->
+                        </div>
+                        <div class="empty-state" id="emptyState" hidden>
+                            <span class="empty-icon">🎉</span>
+                            <p class="empty-text">No results to show</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="action-buttons">
+                        <button class="btn-export" id="exportBtn" aria-label="Export current list to CSV">
+                            📥 Export CSV
+                        </button>
+                        <button class="btn-share" id="shareBtn" aria-label="Share your stats on X">
+                            𝕏 Share on X
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- History Section -->
+            <section class="history-section" id="historySection">
+                <div class="card glass-card">
+                    <h2 class="section-title">
+                        <span class="section-icon">📊</span>
+                        Upload History
+                    </h2>
+                    <div class="history-list" id="historyList">
+                        <p class="history-empty">No previous uploads yet</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>GhostTrace • Your data stays on your device 🔒 • Uses Instagram's official export - doesn't violate any
+                rules</p>
+            <div class="footer-links">
+                <a href="privacy.html" class="footer-link">Privacy Policy</a>
+                <span class="footer-divider">•</span>
+                <a href="https://buymeacoffee.com/elpadregr" target="_blank" rel="noopener" class="coffee-link">
+                    ☕ Buy me a coffee
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
