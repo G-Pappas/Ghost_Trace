@@ -76,6 +76,4 @@ MIT License - feel free to use this for personal or commercial projects.
 
 ---
 
-**Made with 💜 by [@elpadre](https://instagram.com/elpadre)**
-
 ☕ [Buy me a coffee](https://buymeacoffee.com/elpadregr)
